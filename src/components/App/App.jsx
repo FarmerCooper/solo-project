@@ -94,14 +94,7 @@ function App() {
 
           <ProtectedRoute>
             <Route exact path="/search">
-              {user.id ? (
-                // If the user is already logged in,
-                // redirect them to the /user page
-                <Redirect to="/home" />
-              ) : (
-                // Otherwise, show the registration page
-                <SearchPage />
-              )}
+              <SearchPage />
             </Route>
           </ProtectedRoute>
 
