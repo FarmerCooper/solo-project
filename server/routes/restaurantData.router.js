@@ -3,12 +3,12 @@ const router = express.Router();
 const pool = require("../modules/pool");
 const axios = require("axios");
 
-router.get("/:photo_reference", (req, res) => {
-  const queryText = 'SELECT * FROM "solo";';
+router.get("/", (req, res) => {
+  const queryText = 'SELECT * FROM "Downtown_Core_Old";';
   pool
     .query(queryText)
     .then((result) => {
-      res.send(response.data);
+      res.send(result.rows);
     })
     .catch((error) => {
       console.log("Error POST /api/feedback", error);

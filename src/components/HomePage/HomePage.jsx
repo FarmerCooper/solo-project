@@ -42,6 +42,12 @@ function HomePage(props) {
             <button type="submit">Submit</button>
           </form>
         </div>
+            {store.restaurants.map((restaurant, i) => (
+                <div key={i}>
+                    <p>{restaurant.name}</p>
+                    <img src={restaurant.photos_url} alt="" />
+                </div>
+            ))}
       </div>
     );
   }
