@@ -66,10 +66,24 @@ function* getRestrInfo(action) {
     }
 }
 
+function* getAllData( ) {
+    console.log('in getAll Data');
+
+    try {
+        const response = yield axios.get(`/allData`);
+        yield put({type: 'SET_ALL_DATA', payload: response.data});
+
+    } catch (error) {
+        console.log('Error getting all Restaurant DATA');
+    }
+
+}
+
 function* infoSaga() {
     yield takeLatest('FETCH_GEOCODING', getCoordinates)
     yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
     yield takeLatest("FETCH_PHOTOS", getPhotos);
+    yield takeLatest('FETCH_UPDATE', getAllData);
 }
   
 export default infoSaga;
