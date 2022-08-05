@@ -7,7 +7,7 @@ function* getCoordinates(action) {
         let formatAddress = address.replace(/\s/g, '+');
         console.log('this is formatAddress', formatAddress);
       const coordinates = yield axios.get(`/api/coordinates/${formatAddress}`)
-      yield put({type: 'FETCH_RESTAURANTS', payload: coordinates.data})
+      yield put({type: 'FETCH_RESTAURANTS', payload: coordinates.data.results[0].geometry.location})
     } catch (error) {
       console.log('Error in GETting Coords', error)
     }

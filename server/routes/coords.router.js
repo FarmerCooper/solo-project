@@ -7,7 +7,7 @@ const axios = require('axios');
 router.get('/:address', (req, res) => {
 
     console.log('This is req.params', req.params);
-  const address = req.params;
+  const address = req.params.address;
 
     let config = {
         method: 'get',
