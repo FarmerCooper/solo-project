@@ -13,6 +13,20 @@ function HomePage(props) {
         dispatch({type: 'FETCH_GEOCODING', payload: address});
     }
 
+    setTimeout(() => {
+        if (store.photos.length > 0) {
+          for(let i=0; i< store.photos.length; i++) {
+            axios.put(`/api/photos/`, store.photos[i])
+              .then((response) => {
+                dispatch({type: 'FETCH_UPDATE'})
+              })
+              .catch((error) => {
+                console.log('Error in /photos PUT', error);
+              })
+          }
+        }
+      }, 1000);
+
     return (
       <div className="container">
         <div>
