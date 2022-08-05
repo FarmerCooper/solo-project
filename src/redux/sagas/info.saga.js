@@ -39,9 +39,37 @@ function* getRestrInfo(action) {
     }
   }
 
+  function* getPhotos(action) {
+    console.log('in getPhotos');
+    console.log('this is action.payload', action.payload);
+
+    try {
+
+      // GETS the photo references for the pictures by sending individual picture references for each request
+        for (let i=0; i<action.payload.length; i++) {
+            if (action.payload[i].photos !== undefined
+              || action.payload[i].photos !== ''
+              || action.payload[i].photos !== 0) {
+              const response = yield axios.get(`/api/photos/${action.payload[i].photos[0].photo_reference}`)
+                  const combinedPayload = {url: response.data, placeId: action.payload[i].place_id}
+                  console.log(`What we're sending to reducer: `, combinedPayload);
+                  yield put({type: 'SET_PHOTOS', payload: combinedPayload })
+                  yield put({type: 'UPDATE_PHOTOS'})
+            } else {
+              console.log('no photo')
+            }
+            
+        }
+    }
+    catch (error) {
+        console.log('Error in get Photos', error)
+    }
+}
+
 function* infoSaga() {
     yield takeLatest('FETCH_GEOCODING', getCoordinates)
     yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
+    yield takeLatest("FETCH_PHOTOS", getPhotos);
 }
   
 export default infoSaga;
