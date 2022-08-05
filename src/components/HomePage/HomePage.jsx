@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import useReduxStore from '../../hooks/useReduxStore';
+import axios from 'axios';
 
 function HomePage(props) {
 
     const dispatch = useDispatch();
+    const store = useReduxStore();
 
     const [address, setAddress] = useState('')
 
@@ -25,7 +28,7 @@ function HomePage(props) {
               })
           }
         }
-      }, 1000);
+      }, 2000);
 
     return (
       <div className="container">
