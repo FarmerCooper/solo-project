@@ -1,11 +1,12 @@
 import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
-import useReduxStore from "../../hooks/useReduxStore";
-import { useDispatch, useSelector } from 'react-redux';
 
 function* getCoordinates(action) {
     try {
-      const coordinates = yield axios.get(`/api/coordinates/${action.payload}`)
+        let address = action.payload;
+        let formatAddress = address.replace(/\s/g, '+');
+        console.log('this is formatAddress', formatAddress);
+      const coordinates = yield axios.get(`/api/coordinates/${formatAddress}`)
       yield put({type: 'FETCH_RESTAURANTS', payload: coordinates.data})
     } catch (error) {
       console.log('Error in GETting Coords', error)
@@ -13,8 +14,8 @@ function* getCoordinates(action) {
 }
 
 function* infoSaga() {
-    yield takeLatest('FETCH_COORDINATES', getCoordinates)
-    yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
+    yield takeLatest('FETCH_GEOCODING', getCoordinates)
+    // yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
 }
   
 export default infoSaga;

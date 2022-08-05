@@ -9,7 +9,7 @@ function HomePage(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         dispatch({type: 'FETCH_GEOCODING', payload: address});
     }
 
