@@ -13,9 +13,25 @@ function* getCoordinates(action) {
     }
 }
 
+function* getRestrInfo(action) {
+    try {
+        console.log('in getRestrInfo, this is action', action.payload);
+        const propertyValues = Object.values(action.payload)
+        console.log(propertyValues)
+      // gets the restaurant data
+      const restaurant = yield axios.get(`/api/info/${propertyValues}`);
+      // sets the restaurant in the reducer
+      yield put({ type: "SET_RESTAURANTS", payload: restaurant.data.results });
+      
+  
+    } catch (error) {
+      console.log("Error in getRestrInfo", error);
+    }
+  }
+
 function* infoSaga() {
     yield takeLatest('FETCH_GEOCODING', getCoordinates)
-    // yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
+    yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
 }
   
 export default infoSaga;
