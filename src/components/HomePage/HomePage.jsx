@@ -14,21 +14,8 @@ function HomePage(props) {
         event.preventDefault();
 
         dispatch({type: 'FETCH_GEOCODING', payload: address});
-    }
 
-    setTimeout(() => {
-        if (store.photos.length > 0) {
-          for(let i=0; i< store.photos.length; i++) {
-            axios.put(`/api/photos/`, store.photos[i])
-              .then((response) => {
-                dispatch({type: 'FETCH_UPDATE'})
-              })
-              .catch((error) => {
-                console.log('Error in /photos PUT', error);
-              })
-          }
-        }
-      }, 2000);
+    }
 
     return (
       <div className="container">
@@ -42,6 +29,14 @@ function HomePage(props) {
             <button type="submit">Submit</button>
           </form>
         </div>
+            {store.restaurants.map((restaurant, i) => (
+                <div key={i}>
+                    <p>{restaurant.name}</p>
+                    <p>{restaurant.rating}</p>
+                    <p>{restaurant.user_ratings_count}</p>
+                    <img src={restaurant.photos_url} alt="" />
+                </div>
+            ))}
       </div>
     );
   }

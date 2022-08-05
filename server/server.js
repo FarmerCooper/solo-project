@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const coordsRouter = require('./routes/coords.router');
 const infoRouter = require('./routes/info.router');
 const photosRouter = require('./routes/photos.router');
+const allDataRouter = require('./routes/restaurantData.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/coordinates', coordsRouter);
 app.use('/api/info', infoRouter);
 app.use('/api/photos', photosRouter);
+app.use('/allData', allDataRouter);
 
 // Serve static files
 app.use(express.static('build'));
