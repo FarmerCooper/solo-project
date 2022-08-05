@@ -34,11 +34,38 @@ router.get('/:coordinates', (req, res) => {
       });
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+router.post('/', async (req, res) => {
+  const client = await pool.connect();
+  console.log('This is req.body.photos reference', req.body.photos[0].photo_reference);
+  const restaurant_name = req.body.name;
+  const photos_reference = req.body.photos[0].photo_reference;
+  const rating = req.body.rating;
+  const ratings_total = req.body.user_ratings_total;
+  const prominence = Number(Math.round(req.body.user_ratings_total / req.body.rating));
+  const place_id = req.body.place_id;
+  try {
+      await client.query('BEGIN')
+      const feedbackInsertResults = await client.query(`INSERT INTO "Downtown_Core_Old" ("name", "rating", "user_ratings_count", "prominence", "photos_reference", "place_id")
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id;`, [
+        restaurant_name,
+        rating,
+        ratings_total,
+        prominence,
+        photos_reference,
+        place_id
+      ]);
+      const clientId = feedbackInsertResults.rows[0].id;
+
+      await client.query('COMMIT')
+      res.sendStatus(201);
+  } catch (error) {
+      await client.query('ROLLBACK')
+      console.log('Error POST /api/feedback', error);
+      res.sendStatus(500);
+  } finally {
+      client.release()
+  }
 });
 
 module.exports = router;
