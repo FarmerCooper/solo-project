@@ -77,16 +77,6 @@ function* getPhotos(action) {
   }
 }
 
-// function* sendPhotos(action) {
-//     console.log('in sendPhotos');
-//     console.log('photos action', action.payload)
-
-//     try {
-//         axios
-//     } catch (error) {
-//         console.log('Error SENDing photo', error)
-//     }
-// }
 
 function* getAllData() {
   console.log("in getAll Data");
