@@ -30,16 +30,16 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="home">
+            <Link className="navLink" to="/home">
               Home
+            </Link>
+
+            <Link className="navLink" to="/favorites">
+              Favorites
             </Link>
 
             <Link className="navLink" to="/drool-list">
               Drool List
-            </Link>
-
-            <Link className="navLink" to="/search">
-              Search
             </Link>
 
             <LogOutButton className="navLink" />
