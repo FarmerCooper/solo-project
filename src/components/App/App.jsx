@@ -14,11 +14,11 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import AboutPage from "../AboutPage/AboutPage";
+import FavoritesPage from "../FavoritesPage/FavoritesPage";
 import HomePage from "../HomePage/HomePage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import SearchPage from "../SearchPage/SearchPage";
 import UserPage from "../UserPage/UserPage";
 import WishlistPage from "../WishlistPage/WishlistPage";
 
@@ -55,6 +55,7 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             
+          
           <Route
             exact
             path="/home"
@@ -84,19 +85,15 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/home"></Route>
-
           <ProtectedRoute>
             <Route exact path="/drool-list">
               <WishlistPage />
             </Route>
-          </ProtectedRoute>
-
-          <ProtectedRoute>
-            <Route exact path="/search">
-              <SearchPage />
+            <Route exact path="/favorites">
+              <FavoritesPage/>
             </Route>
           </ProtectedRoute>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

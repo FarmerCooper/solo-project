@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function SearchPage() {
+function FavoritesPage() {
   return (
     <div className="container">
       <div>
@@ -11,4 +11,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default FavoritesPage;
