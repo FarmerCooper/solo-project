@@ -16,6 +16,7 @@ function FavoritesPage() {
       {store.favorites.map((favorite, i) => (
         <div key={i}>
           <p>{favorite.restr_name}</p>
+          <p>{favorite.user_rating}</p>
           <img src={favorite.photos_url} alt="" />
         </div>
       ))}
