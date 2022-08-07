@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import favoritesSaga from './favorites.saga';
 import infoSaga from './info.saga';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    infoSaga()
+    infoSaga(),
+    favoritesSaga(),
   ]);
 }
