@@ -23,9 +23,21 @@ function* postFavorites(action) {
     }
 }
 
+function* deleteFavorite(action) {
+    console.log('in deleteFavorite, action.payload:', action.payload);
+
+    try {
+        yield axios.delete(`/userFavorites/${action.payload}`);
+        yield getFavorites();
+    } catch (error) {
+        console.log('Error in deleteFavorite', error);
+    }
+}
+
 function* favoritesSaga() {
     yield takeEvery("FETCH_FAVORITES", getFavorites);
     yield takeEvery("POST_FAVORITE", postFavorites);
+    yield takeEvery("VANISH_ITEM", deleteFavorite)
 }
   
 export default favoritesSaga;

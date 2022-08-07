@@ -11,6 +11,12 @@ function FavoritesPage() {
     dispatch({ type: "FETCH_FAVORITES" });
   }, []);
 
+  const handleDelete = (event) => {
+    console.log('in handleDelete, place_id:', event.target.value);
+
+    dispatch({type: "VANISH_ITEM", payload: event.target.value});
+  }
+
   return (
     <div className="container">
       {store.favorites.map((favorite, i) => (
@@ -18,6 +24,12 @@ function FavoritesPage() {
           <p>{favorite.restr_name}</p>
           <p>{favorite.user_rating}</p>
           <img src={favorite.photos_url} alt="" />
+          <button
+          onClick={event => handleDelete(event)}
+          value={[favorite.place_id]}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>

@@ -25,15 +25,16 @@ router.post("/", async (req, res) => {
 
   const restaurant_name = req.body[0];
   const photos_url = req.body[1];
+  const place_id = req.body[2];
   const currentUser = req.user.id;
 
   try {
     await client.query("BEGIN");
     const favoriteResults = await client.query(
-      `INSERT INTO "favorites" ("restr_name", "photos_url", "user_id")
-        VALUES ($1, $2, $3)
+      `INSERT INTO "favorites" ("restr_name", "photos_url", "user_id", "place_id")
+        VALUES ($1, $2, $3, $4)
         RETURNING id;`,
-      [restaurant_name, photos_url, currentUser]
+      [restaurant_name, photos_url, currentUser, place_id]
     );
     const clientId = favoriteResults.rows[0].id;
 
@@ -47,5 +48,21 @@ router.post("/", async (req, res) => {
     client.release();
   }
 });
+
+router.delete("/:placeId", (req, res) => {
+    console.log('this is req.params', req.params);
+    console.log("this is req.params.placeId ", req.params.placeId);
+  
+    const queryText = `DELETE FROM "favorites" WHERE "place_id" = $1;`;
+    pool
+      .query(queryText, [req.params.placeId])
+      .then(function (response) {
+        res.sendStatus(200);
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;
