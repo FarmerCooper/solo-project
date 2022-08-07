@@ -23,12 +23,23 @@ function* postFavorites(action) {
     }
 }
 
+function* editRating(action) {
+    console.log('in editRating, action.payload:', action.payload);
+
+    try {
+        yield axios.put('/userFavorites', action.payload);
+        yield window.location.reload();
+    } catch (error) {
+        console.log('Error UPDATEing rating', error);
+    }
+}
+
 function* deleteFavorite(action) {
     console.log('in deleteFavorite, action.payload:', action.payload);
 
     try {
         yield axios.delete(`/userFavorites/${action.payload}`);
-        yield getFavorites();
+        yield put({type: "FETCH_FAVORITES"});
     } catch (error) {
         console.log('Error in deleteFavorite', error);
     }
@@ -37,7 +48,8 @@ function* deleteFavorite(action) {
 function* favoritesSaga() {
     yield takeEvery("FETCH_FAVORITES", getFavorites);
     yield takeEvery("POST_FAVORITE", postFavorites);
-    yield takeEvery("VANISH_ITEM", deleteFavorite)
+    yield takeEvery("VANISH_ITEM", deleteFavorite);
+    yield takeLatest("EDIT_RATING", editRating);
 }
   
 export default favoritesSaga;

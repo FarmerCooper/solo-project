@@ -49,6 +49,24 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/", (req, res) => {
+    console.log('this is req.body', req.body);
+    
+    const inputRating = req.body.rating;
+    const place_id = req.body.place_id;
+  
+    const queryText = `UPDATE "favorites" SET "user_rating" = $1 WHERE place_id = $2;`;
+    pool
+      .query(queryText, [inputRating, place_id])
+      .then(function (response) {
+        res.sendStatus(200);
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.sendStatus(500);
+      });
+});
+
 router.delete("/:placeId", (req, res) => {
     console.log('this is req.params', req.params);
     console.log("this is req.params.placeId ", req.params.placeId);
@@ -63,6 +81,6 @@ router.delete("/:placeId", (req, res) => {
         console.log(error);
         res.sendStatus(500);
       });
-  });
+});
 
 module.exports = router;
