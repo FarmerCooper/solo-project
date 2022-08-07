@@ -16,9 +16,9 @@ function HomePage(props) {
   };
 
   const addToFavorites = (event) => {
-    console.log("in addToFavorites");
     console.log("this is event.target", event.target.value);
-    console.log("this is the restaurant name");
+
+    dispatch({type: "POST_FAVORITE", payload: event.target.value});
   };
 
   return (
