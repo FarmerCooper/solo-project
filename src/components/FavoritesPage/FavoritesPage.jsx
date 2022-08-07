@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useReduxStore from "../../hooks/useReduxStore";
 
 function FavoritesPage() {
+  const store = useReduxStore();
 
   const dispatch = useDispatch();
 
@@ -11,9 +13,12 @@ function FavoritesPage() {
 
   return (
     <div className="container">
-      <div>
-        <p>This will contain a Google search feature!</p>
-      </div>
+      {store.favorites.map((favorite, i) => (
+        <div key={i}>
+          <p>{favorite.restr_name}</p>
+          <img src={favorite.photos_url} alt="" />
+        </div>
+      ))}
     </div>
   );
 }
