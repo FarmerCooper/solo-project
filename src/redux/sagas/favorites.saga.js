@@ -28,7 +28,7 @@ function* editRating(action) {
 
     try {
         yield axios.put('/userFavorites', action.payload);
-        yield window.location.reload();
+        yield put({type: "FETCH_FAVORITES"});
     } catch (error) {
         console.log('Error UPDATEing rating', error);
     }
