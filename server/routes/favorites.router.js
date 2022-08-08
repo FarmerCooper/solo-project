@@ -7,7 +7,7 @@ const axios = require("axios");
 router.get("/", (req, res) => {
   console.log("user.id logged in: ", req.user.id);
 
-  const queryText = `SELECT * FROM "favorites" WHERE "user_id" = $1;`;
+  const queryText = `SELECT * FROM "favorites" WHERE "user_id" = $1 ORDER BY id;`;
   pool
     .query(queryText, [req.user.id])
     .then(function (result) {
