@@ -1,46 +1,61 @@
-import React from 'react'
-import { GoogleMap, useJsApiLoader, useLoadScript, Marker } from '@react-google-maps/api';
+import React, { useCallback, useState } from "react";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  useLoadScript,
+  MarkerF,
+} from "@react-google-maps/api";
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: "400px",
+  height: "400px",
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
+  lat: 39.098,
+  lng: -94.578,
 };
+
+const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.PLACES_API_KEY,
-  })
+    id: "google-map-script",
+    googleMapsApiKey: google_api_key,
+    libraries: ["places"],
+  });
 
-  const [map, setMap] = React.useState(null)
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 
-  const onLoad = React.useCallback(function callback(map) {
+  const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
-    setMap(map)
-  }, [])
+    setMap(map);
+  }, []);
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
+  const onUnmount = useCallback(function callback(map) {
+    setMap(null);
+  }, []);
 
   return isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
-  ) : <></>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={4}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+      options={{
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      }}
+    >
+      {/* Child components, such as markers, info windows, etc. */}
+      <MarkerF position={{ lat: 44, lng: -80 }} />
+    </GoogleMap>
+  ) : (
+    <></>
+  );
 }
 
 export default Map;
