@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useReduxStore from "../../hooks/useReduxStore";
+import Map from './Map';
 
 function FavoritesPage() {
   const store = useReduxStore();
@@ -27,9 +28,9 @@ function FavoritesPage() {
   }
 
   return (
-    <div className="container">
+    <>
       {store.favorites.map((favorite, i) => (
-        <div key={i}>
+        <div key={i} className="container">
           <p>{favorite.restr_name}</p>
           <p>{favorite.user_rating}</p>
           <input 
@@ -50,7 +51,10 @@ function FavoritesPage() {
           </button>
         </div>
       ))}
-    </div>
+      <div>
+        <Map />
+      </div>
+    </>
   );
 }
 
