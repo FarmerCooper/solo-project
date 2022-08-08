@@ -12,8 +12,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 39.098,
-  lng: -94.578,
+  lat: 44.9780806,
+  lng: -93.2634508,
 };
 
 const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
