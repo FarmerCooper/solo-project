@@ -5,6 +5,7 @@ import {
   useLoadScript,
   MarkerF,
 } from "@react-google-maps/api";
+import useReduxStore from "../../hooks/useReduxStore";
 
 const containerStyle = {
   width: "400px",
@@ -19,6 +20,18 @@ const center = {
 const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
 
 function Map() {
+
+  const store = useReduxStore();
+
+  let locations = [];
+  if (store.favorites.length > 0) {
+    for (let i=0; i<store.favorites.length; i++) {
+      // console.log('this is all locations', store.favorites[i].place_location);
+  
+      locations.push(JSON.parse(store.favorites[i].place_location));
+    }
+  }
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: google_api_key,
@@ -27,7 +40,7 @@ function Map() {
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 
-  const onLoad = useCallback(function callback(map) {
+  const onLoad = useCallback(function callback(map, locations) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
     setMap(map);
@@ -51,7 +64,14 @@ function Map() {
       }}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      <MarkerF position={{ lat: 44, lng: -80 }} />
+      {locations?.map((location, i) =>{
+              return(
+                 < MarkerF position={{lat: location.lat, lng: location.lng}}
+                  lat={location.lat}
+                  lng={location.lng}
+                  />
+              )
+              })}
     </GoogleMap>
   ) : (
     <></>
