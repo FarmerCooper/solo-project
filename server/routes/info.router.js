@@ -19,7 +19,7 @@ router.get('/:coordinates', (req, res) => {
 
     let config = {
         method: 'get',
-        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&location=${latitude}%2C${longitude}&radius=300&type=restaurant&key=${process.env.PLACES_API_KEY}`,
+        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&location=${latitude}%2C${longitude}&radius=50&type=restaurant&key=${process.env.PLACES_API_KEY}`,
         headers: {}
       };
 
