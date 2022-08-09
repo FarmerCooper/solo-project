@@ -21,20 +21,22 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
   const client = await pool.connect();
-  console.log('this is req.body', req.body);
+  console.log('this is req.body in favorites post', req.body);
 
   const restaurant_name = req.body[0];
   const photos_url = req.body[1];
   const place_id = req.body[2];
+  const location = req.body[3] + ',' + req.body[4];
   const currentUser = req.user.id;
 
+  console.log('this is location', location);
   try {
     await client.query("BEGIN");
     const favoriteResults = await client.query(
-      `INSERT INTO "favorites" ("restr_name", "photos_url", "user_id", "place_id")
-        VALUES ($1, $2, $3, $4)
+      `INSERT INTO "favorites" ("restr_name", "photos_url", "place_location", "user_id", "place_id")
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING id;`,
-      [restaurant_name, photos_url, currentUser, place_id]
+      [restaurant_name, photos_url, location, currentUser, place_id]
     );
     const clientId = favoriteResults.rows[0].id;
 
