@@ -4,6 +4,7 @@ import favorites from './favorites.reducer';
 import user from './user.reducer';
 import photos from './photos.reducer';
 import restaurants from './allData.reducer'
+import coordinates from './coordinates.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   photos,
   restaurants,
   favorites,
+  coordinates,
 });
 
 export default rootReducer;

@@ -22,16 +22,6 @@ const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
 function Map() {
   const store = useReduxStore();
 
-  let locations = [];
-
-  // if (store.favorites?.length > 0) {
-  //   for (let i = 0; i < store.favorites.length; i++) {
-  //     // console.log('this is all locations', store.favorites[i].place_location);
-
-  //     locations.push(JSON.parse(store.favorites[i].place_location));
-  //   }
-  // }
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: google_api_key,
@@ -39,6 +29,7 @@ function Map() {
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  // const [locations, setLocations] = useState({lat: 0, lng: 0})
 
   const onLoad = useCallback(function callback(map, locations) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -50,13 +41,13 @@ function Map() {
     setMap(null);
   }, []);
 
-  if (store.favorites) {
-    for (let i = 0; i < store.favorites.length; i++) {
-      // console.log('this is all locations', store.favorites[i].place_location);
-      
-      locations.push(JSON.parse(store?.favorites[i]?.place_location));
+  let locations = [];
+
+    for (let i = 0; i < store.coordinates.length; i++) {
+      // console.log('this is all locations', store.coordinates[i]);
+
+      locations.push(store.coordinates[i]);
     }
-  }
 
   return isLoaded ? (
     <GoogleMap
@@ -73,7 +64,7 @@ function Map() {
     >
       {/* Child components, such as markers, info windows, etc. */}
       {locations?.map((location, i) => {
-        return <MarkerF key={i} position={{ lat: location.lat, lng: location.lng }} />;
+        return  <MarkerF key={i} position={{ lat: location.lat, lng: location.lng }} />;
       })}
     </GoogleMap>
   ) : (
