@@ -6,7 +6,11 @@ function* getFavorites() {
 
     try {
         const response = yield axios.get('/userFavorites');
-        yield put({ type: "SET_RESTAURANTS", payload: response.data,});
+        console.log('response.data from favorites', response.data)
+        yield put({ type: "SET_RESTAURANTS", payload: response.data});
+        for (let i=0; i<response.data.length; i++) {
+            yield put({type: "SET_COORDINATES", payload: JSON.parse(response.data[i].place_location)})
+        }
       } catch (error) {
         console.log("Error in GETting favorites", error);
       }
@@ -28,7 +32,7 @@ function* editRating(action) {
 
     try {
         yield axios.put('/userFavorites', action.payload);
-        yield window.location.reload();
+        yield put({type: "FETCH_FAVORITES"});
     } catch (error) {
         console.log('Error UPDATEing rating', error);
     }

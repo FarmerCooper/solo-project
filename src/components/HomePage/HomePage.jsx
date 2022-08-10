@@ -42,7 +42,7 @@ function HomePage(props) {
           <img src={restaurant.photos_url} alt="" />
           <button
             onClick={(event) => addToFavorites(event)}
-            value={[restaurant.name, restaurant.photos_url, restaurant.place_id]}
+            value={[restaurant.name, restaurant.photos_url, restaurant.place_id, restaurant.place_location]}
           >
             Add to Favorites
           </button>

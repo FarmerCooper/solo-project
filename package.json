@@ -7,6 +7,7 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@react-google-maps/api": "^2.12.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

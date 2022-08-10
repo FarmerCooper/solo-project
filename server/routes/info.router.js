@@ -19,13 +19,12 @@ router.get('/:coordinates', (req, res) => {
 
     let config = {
         method: 'get',
-        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&location=${latitude}%2C${longitude}&radius=300&type=restaurant&key=${process.env.PLACES_API_KEY}`,
+        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&location=${latitude}%2C${longitude}&radius=50&type=restaurant&key=${process.env.PLACES_API_KEY}`,
         headers: {}
       };
 
       axios(config)
       .then(function (response) {
-        console.log('this is what JSON.stringy(response.data) is:', (response.data));
         res.send(response.data)
       })
       .catch(function (error) {
@@ -36,23 +35,25 @@ router.get('/:coordinates', (req, res) => {
 
 router.post('/', async (req, res) => {
   const client = await pool.connect();
-  console.log('This is req.body.photos reference', req.body.photos[0].photo_reference);
+  // console.log('This is req.body.geometry.location', req.body.geometry.location);
   const restaurant_name = req.body.name;
   const photos_reference = req.body.photos[0].photo_reference;
   const rating = req.body.rating;
   const ratings_total = req.body.user_ratings_total;
   const prominence = Number(Math.round(req.body.user_ratings_total / req.body.rating));
+  const location = req.body.geometry.location;
   const place_id = req.body.place_id;
   try {
       await client.query('BEGIN')
-      const feedbackInsertResults = await client.query(`INSERT INTO "Downtown_Core_Old" ("name", "rating", "user_ratings_count", "prominence", "photos_reference", "place_id")
-      VALUES ($1, $2, $3, $4, $5, $6)
+      const feedbackInsertResults = await client.query(`INSERT INTO "Downtown_Core_Old" ("name", "rating", "user_ratings_count", "prominence", "photos_reference", "place_location", "place_id")
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING id;`, [
         restaurant_name,
         rating,
         ratings_total,
         prominence,
         photos_reference,
+        location,
         place_id
       ]);
       const clientId = feedbackInsertResults.rows[0].id;
