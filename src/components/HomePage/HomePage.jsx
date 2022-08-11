@@ -21,6 +21,12 @@ function HomePage(props) {
     dispatch({type: "POST_FAVORITE", payload: event.target.value});
   };
 
+  const addToDroolList = (event) => {
+    console.log("this is event.target", event.target.value);
+
+    dispatch({type: "POST_DROOL", payload: event.target.value});
+  };
+
   return (
     <div className="container">
       <div>
@@ -46,7 +52,12 @@ function HomePage(props) {
           >
             Add to Favorites
           </button>
-          <button>Add to Drool List</button>
+          <button 
+          onClick={(event) => addToDroolList(event)} 
+          value={[restaurant.name, restaurant.place_location]}
+          >
+            Add to Drool List
+          </button>
         </div>
       ))}
     </div>
