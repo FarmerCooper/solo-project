@@ -7,7 +7,10 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@googlemaps/js-api-loader": "^1.14.3",
+    "@mui/material": "^5.10.0",
     "@react-google-maps/api": "^2.12.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
