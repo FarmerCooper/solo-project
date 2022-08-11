@@ -51,9 +51,9 @@ router.post("/", async (req, res) => {
 router.delete("/:restaurantName", (req, res) => {
   console.log('in drool delete, req.params:', req.params);
 
-  const queryText = `DELETE FROM "drool_list" WHERE "restr_name" = $1;`;
+  const queryText = `DELETE FROM "drool_list" WHERE "restr_name" = $1 AND "user_id" = $2;`;
   pool
-    .query(queryText, [req.params.restaurantName])
+    .query(queryText, [req.params.restaurantName, req.user.id])
     .then(function (response) {
       res.sendStatus(200);
     })
