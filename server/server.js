@@ -14,6 +14,7 @@ const infoRouter = require('./routes/info.router');
 const photosRouter = require('./routes/photos.router');
 const allDataRouter = require('./routes/restaurantData.router');
 const favoritesRouter = require('./routes/favorites.router');
+const droolRouter = require('./routes/drools.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,6 +34,7 @@ app.use('/api/info', infoRouter);
 app.use('/api/photos', photosRouter);
 app.use('/allData', allDataRouter);
 app.use('/userFavorites', favoritesRouter);
+app.use('/userDrools', droolRouter);
 
 // Serve static files
 app.use(express.static('build'));
