@@ -40,9 +40,13 @@ function* editRating(action) {
 
 function* deleteFavorite(action) {
     console.log('in deleteFavorite, action.payload:', action.payload);
+    let myArray = action.payload.split(/[,]+/)
+    console.log(myArray[0])
 
+    let coordinates = JSON.parse(myArray[1] + ',' +  myArray[2])
     try {
-        yield axios.delete(`/userFavorites/${action.payload}`);
+        yield axios.delete(`/userFavorites/${myArray[0]}`);
+        yield put({type: "UNSET_COORDINATES", payload: coordinates});
         yield put({type: "FETCH_FAVORITES"});
     } catch (error) {
         console.log('Error in deleteFavorite', error);
