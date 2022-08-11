@@ -45,7 +45,7 @@ function FavoritesPage() {
           <img src={favorite.photos_url} alt="" />
           <button
           onClick={event => handleDelete(event)}
-          value={[favorite.place_id]}
+          value={[favorite.place_id, favorite.place_location]}
           >
             Delete
           </button>
