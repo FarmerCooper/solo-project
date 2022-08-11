@@ -48,4 +48,19 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.delete("/:restaurantName", (req, res) => {
+  console.log('in drool delete, req.params:', req.params);
+
+  const queryText = `DELETE FROM "drool_list" WHERE "restr_name" = $1;`;
+  pool
+    .query(queryText, [req.params.restaurantName])
+    .then(function (response) {
+      res.sendStatus(200);
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

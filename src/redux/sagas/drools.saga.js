@@ -24,9 +24,21 @@ function* postDrools(action) {
     }
 }
 
+function* deleteDrool(action) {
+    console.log('in deleteDrool, action.payload:', action.payload);
+
+    try {
+        yield axios.delete(`/userDrools/${action.payload}`);
+        yield put({type: "FETCH_DROOLS", getDrools});
+    } catch (error) {
+        console.log('Error in POSTing to drools', error);
+    }
+}
+
 function* droolsSaga() {
     yield takeEvery("POST_DROOL", postDrools);
-    yield takeLatest("FETCH_DROOLS", getDrools)
+    yield takeLatest("FETCH_DROOLS", getDrools);
+    yield takeEvery("VANISH_THOU", deleteDrool);
 }
   
 export default droolsSaga;
