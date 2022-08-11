@@ -9,9 +9,16 @@ body {
   margin: 0px;
 }
 
-img {
-  display: inline-block;
-  max-width: 100%;
+.restaurant-img {
+width: 240px;
+height: 130px;
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+overflow: hidden;
+}
+.restaurant-img img {
+opacity: 0;
 }
 
 /* --------------------------------------------------------------------------------
@@ -19,7 +26,8 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
-  padding: 20px;
+padding-right: 2em;
+border: #ca5f68 solid .10em;
 }
 
 /* --------------------------------------------------------------------------------
@@ -29,10 +37,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #320914;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #ca5f68;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -55,7 +63,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #860829;
   text-decoration: none;
 }
 
@@ -109,4 +117,15 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+table {
+  text-align: left;
+  position: relative;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0;
 }
