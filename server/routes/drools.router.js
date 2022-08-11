@@ -3,6 +3,21 @@ const router = express.Router();
 const pool = require("../modules/pool");
 const axios = require("axios");
 
+router.get("/", (req, res) => {
+  console.log("user.id logged in: ", req.user.id);
+
+  const queryText = `SELECT * FROM "drool_list" WHERE "user_id" = $1 ORDER BY id;`;
+  pool
+    .query(queryText, [req.user.id])
+    .then(function (result) {
+      res.send(result.rows);
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
 router.post("/", async (req, res) => {
     const client = await pool.connect();
     console.log('this is req.body in favorites post', req.body);

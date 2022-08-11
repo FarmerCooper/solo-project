@@ -1,12 +1,48 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import useReduxStore from "../../hooks/useReduxStore";
+import { useDispatch, useSelector } from "react-redux";
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 function WishlistPage() {
+  const store = useReduxStore();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_DROOLS" });
+  }, []);
+
     return (
-      <div className="container">
-        <div>
-          <p>This will contain all the drools!</p>
-        </div>
-      </div>
+      <>
+         <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Restaurant(s)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {store.drools.map((drool, i) => (
+            <TableRow
+              key={i}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {drool.restr_name}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+      </>
     );
   }
   
