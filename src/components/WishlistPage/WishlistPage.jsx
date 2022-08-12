@@ -25,8 +25,24 @@ function WishlistPage() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer
+        sx={{
+          height: 300,
+          width: "80%",
+          overflow: "hidden",
+          overflowY: "scroll",
+          margin: "auto",
+        }}
+        component={Paper}
+      >
+        <Table
+          stickyHeader
+          aria-label="sticky table"
+          xs={12}
+          sm={10}
+          md={8}
+          lg={8}
+        >
           <TableHead>
             <TableRow>
               <TableCell>Restaurant(s)</TableCell>
