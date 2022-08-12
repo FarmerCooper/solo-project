@@ -168,7 +168,8 @@ function HomePage(props) {
           Search Nearby
         </Button>
       </form>
-      <h3>Enter a valid address to begin</h3>
+      <h3>Enter an address to begin</h3>
+      <h4>Address, City, State/Province/Country</h4>
     </div>
   );
 }
