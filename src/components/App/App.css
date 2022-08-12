@@ -9,9 +9,16 @@ body {
   margin: 0px;
 }
 
-img {
-  display: inline-block;
-  max-width: 100%;
+.restaurant-img {
+width: 240px;
+height: 130px;
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+overflow: hidden;
+}
+.restaurant-img img {
+opacity: 0;
 }
 
 /* --------------------------------------------------------------------------------
@@ -19,8 +26,28 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
+  background-image: url(../../images/Apperitives.jpeg);
+  background-position: 'center';
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
+  width: '100vw';
+  height: '100vh';
+}
+
+.home-text {
+  text-align: center;
+}
+
+.float-container {
+  padding: 40px;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
   padding: 20px;
 }
+
 
 /* --------------------------------------------------------------------------------
 Button
@@ -29,10 +56,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #320914;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #ca5f68;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -45,8 +72,13 @@ Button
 }
 
 .btn_sizeSm {
-  padding: 10px 15px;
+  padding: 5px 7.5px;
   font-size: 0.8rem;
+}
+
+.btn_sizeXs {
+  padding: 10px 15px;
+  font-size: 0.8em;
 }
 
 .btn_sizeFull {
@@ -55,7 +87,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #860829;
   text-decoration: none;
 }
 
@@ -106,7 +138,7 @@ Form Treatment
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
 
-input {
+.set-input {
   margin: 5px;
   margin-bottom: 10px;
 }
