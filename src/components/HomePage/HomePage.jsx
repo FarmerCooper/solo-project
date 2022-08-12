@@ -17,6 +17,7 @@ function HomePage(props) {
   const store = useReduxStore();
 
   const [address, setAddress] = useState("");
+  const [show, setShow] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,15 +28,24 @@ function HomePage(props) {
   const addToFavorites = (event) => {
     console.log("this is event.target", event.target.value);
 
-    dispatch({ type: "POST_FAVORITE", payload: event.target.value });
-    swal("Favorites", "Added to favorites!", "success");
+    if (store.user.id) {
+      dispatch({ type: "POST_FAVORITE", payload: event.target.value });
+      swal("🫡", "Added to favorites!", "success");
+    } else {
+      swal("", "Pleae login/register", "warning");
+    }
+
   };
 
   const addToDroolList = (event) => {
     console.log("this is event.target", event.target.value);
 
-    dispatch({ type: "POST_DROOL", payload: event.target.value });
-    swal("👅 💦", "Added to Drool List", "success");
+    if (store.user.id) {
+      dispatch({ type: "POST_DROOL", payload: event.target.value });
+      swal("👅 💦", "Added to Drool List", "success");
+    } else {
+      swal("", "Please login/register", "warning");
+    }
   };
 
   return (
