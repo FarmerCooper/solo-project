@@ -4,7 +4,7 @@ const pool = require("../modules/pool");
 const axios = require("axios");
 
 router.get("/", (req, res) => {
-  const queryText = 'SELECT * FROM "Downtown_Core_Old";';
+  const queryText = 'SELECT * FROM "Downtown_Core_Old" ORDER BY "prominence" DESC;';
   pool
     .query(queryText)
     .then((result) => {
