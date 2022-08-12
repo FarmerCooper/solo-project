@@ -38,6 +38,16 @@ Container
   text-align: center;
 }
 
+.float-container {
+  padding: 40px;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 20px;
+}
+
 
 /* --------------------------------------------------------------------------------
 Button
@@ -62,8 +72,13 @@ Button
 }
 
 .btn_sizeSm {
-  padding: 10px 15px;
+  padding: 5px 7.5px;
   font-size: 0.8rem;
+}
+
+.btn_sizeXs {
+  padding: 10px 15px;
+  font-size: 0.8em;
 }
 
 .btn_sizeFull {
@@ -123,7 +138,7 @@ Form Treatment
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
 
-input {
+.set-input {
   margin: 5px;
   margin-bottom: 10px;
 }
