@@ -3,6 +3,7 @@ import axios from "axios";
 
 function* getCoordinates(action) {
   try {
+    yield axios.post('/allData');
     let address = action.payload;
     let formatAddress = address.replace(/\s/g, "+");
     console.log("this is formatAddress", formatAddress);
@@ -77,6 +78,16 @@ function* getPhotos(action) {
   }
 }
 
+// function* getNewTable() {
+//   console.log('in truncateData');
+
+//   try {
+//     yield axios.post('/allData');
+//     yield put({type: "FETCH_GEOCODING"})
+//   } catch (error) {
+//     console.log('Error truncating data', error);
+//   }
+// }
 
 function* getAllData() {
   console.log("in getAll Data");
@@ -93,6 +104,7 @@ function* infoSaga() {
   yield takeLatest("FETCH_GEOCODING", getCoordinates);
   yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
   yield takeLatest("FETCH_PHOTOS", getPhotos);
+  // yield takeLatest("FETCH_NEW_TABLE", getNewTable);
   yield takeLatest("FETCH_UPDATE", getAllData);
 }
 
