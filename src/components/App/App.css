@@ -26,9 +26,18 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
-padding-right: 2em;
-border: #ca5f68 solid .10em;
+  background-image: url(../../images/Apperitives.jpeg);
+  background-position: 'center';
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
+  width: '100vw';
+  height: '100vh';
 }
+
+.home-text {
+  text-align: center;
+}
+
 
 /* --------------------------------------------------------------------------------
 Button
@@ -117,15 +126,4 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
-}
-
-table {
-  text-align: left;
-  position: relative;
-}
-
-th {
-  background: white;
-  position: sticky;
-  top: 0;
 }
