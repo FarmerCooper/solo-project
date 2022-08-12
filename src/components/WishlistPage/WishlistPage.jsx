@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useReduxStore from "../../hooks/useReduxStore";
 import { useDispatch, useSelector } from "react-redux";
+import { keyframes } from "styled-components";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -25,6 +26,9 @@ function WishlistPage() {
 
   return (
     <>
+    <div className="drops lightblue"></div>
+    <div className="drops lightblue"></div>
+    
       <TableContainer
         sx={{
           height: 300,

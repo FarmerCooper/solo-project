@@ -142,3 +142,40 @@ Form Treatment
   margin: 5px;
   margin-bottom: 10px;
 }
+
+/* --------------------------------------------------------------------------------
+Animations
+-------------------------------------------------------------------------------- */
+
+/* Source: Daily Tuition on Youtube */
+.drops {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 40px;
+  left: 85%;
+  border-radius: 1em;
+  background-color: lightblue;
+  border-top-right-radius: 0.2em;
+  transform: rotate(-40deg);
+  animation: drops 5.5s linear infinite;
+}
+
+.drops:nth-child(2) {
+  left: 87%;
+  animation-delay: 0.5s;
+}
+
+@keyframes drops {
+  0% {
+    opacity: 0.2;
+    transform: translateY(0)rotate(-40deg)
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px);
+    opacity: 2;
+  }
+}
