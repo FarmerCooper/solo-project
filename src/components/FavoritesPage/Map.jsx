@@ -8,8 +8,9 @@ import {
 import useReduxStore from "../../hooks/useReduxStore";
 
 const containerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "600px",
+  height: "440px",
+  float: 'right',
 };
 
 const center = {
