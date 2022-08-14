@@ -3,9 +3,9 @@ const router = express.Router();
 const pool = require("../modules/pool");
 const axios = require("axios");
 
-// This route *should* return the API's data
+// This route returns user restaurant favorites
 router.get("/", (req, res) => {
-  console.log("user.id logged in: ", req.user.id);
+  // console.log("user.id logged in: ", req.user.id);
 
   const queryText = `SELECT * FROM "favorites" WHERE "user_id" = $1 ORDER BY id;`;
   pool
@@ -19,17 +19,19 @@ router.get("/", (req, res) => {
     });
 });
 
+// Updates favorites data
 router.post("/", async (req, res) => {
   const client = await pool.connect();
-  console.log('this is req.body in favorites post', req.body);
+  // console.log('this is req.body in favorites post', req.body);
 
   const restaurant_name = req.body[0];
   const photos_url = req.body[1];
   const place_id = req.body[2];
+  // Combines latitude and longitude into one object 
   const location = req.body[3] + ',' + req.body[4];
   const currentUser = req.user.id;
 
-  console.log('this is location', location);
+  // console.log('this is location', location);
   try {
     await client.query("BEGIN");
     const favoriteResults = await client.query(
@@ -51,8 +53,9 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Updates the rating according to user's input
 router.put("/", (req, res) => {
-    console.log('this is req.body', req.body);
+    // console.log('this is req.body', req.body);
     
     const inputRating = req.body.rating;
     const place_id = req.body.place_id;
@@ -69,13 +72,14 @@ router.put("/", (req, res) => {
       });
 });
 
+// Deletes favorite restaurant
 router.delete("/:placeId", (req, res) => {
-    console.log('this is req.params', req.params);
-    console.log("this is req.params.placeId ", req.params.placeId);
+    // console.log('this is req.params', req.params);
+    // console.log("this is req.params.placeId ", req.params.placeId);
   
-    const queryText = `DELETE FROM "favorites" WHERE "place_id" = $1;`;
+    const queryText = `DELETE FROM "favorites" WHERE "place_id" = $1 AND "user_id" = $2;`;
     pool
-      .query(queryText, [req.params.placeId])
+      .query(queryText, [req.params.placeId, req.user.id])
       .then(function (response) {
         res.sendStatus(200);
       })

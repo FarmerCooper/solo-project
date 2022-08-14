@@ -1,12 +1,16 @@
 import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
+// Gets coordinates based on user input
 function* getCoordinates(action) {
   try {
+    // Truncates the database
     yield axios.post('/allData');
+
     let address = action.payload;
+    // Formats the address to fit API parameter specifications
     let formatAddress = address.replace(/\s/g, "+");
-    console.log("this is formatAddress", formatAddress);
+    // console.log("this is formatAddress", formatAddress);
     const coordinates = yield axios.get(`/api/coordinates/${formatAddress}`);
     yield put({
       type: "FETCH_RESTAURANTS",
@@ -17,13 +21,17 @@ function* getCoordinates(action) {
   }
 }
 
+// Bulk of restaurant data 
 function* getRestrInfo(action) {
   try {
-    console.log("in getRestrInfo, this is action", action.payload);
+    // console.log("in getRestrInfo, this is action", action.payload);
+
     const propertyValues = Object.values(action.payload);
-    console.log(propertyValues);
+    // console.log(propertyValues);
+
     // gets the restaurant data
     const restaurant = yield axios.get(`/api/info/${propertyValues}`);
+
     // sets the restaurant in the reducer
     yield put({ type: "SET_RESTAURANTS", payload: restaurant.data.results });
 
@@ -46,9 +54,10 @@ function* getRestrInfo(action) {
   }
 }
 
+// Gets the photo url
 function* getPhotos(action) {
-  console.log("in getPhotos");
-  console.log("this is action.payload", action.payload);
+  // console.log("in getPhotos");
+  // console.log("this is action.payload", action.payload);
 
   try {
     // GETS the photo references for the pictures by sending individual picture references for each request
@@ -78,19 +87,9 @@ function* getPhotos(action) {
   }
 }
 
-// function* getNewTable() {
-//   console.log('in truncateData');
-
-//   try {
-//     yield axios.post('/allData');
-//     yield put({type: "FETCH_GEOCODING"})
-//   } catch (error) {
-//     console.log('Error truncating data', error);
-//   }
-// }
-
+// Gets all the updated data with photo url
 function* getAllData() {
-  console.log("in getAll Data");
+  // console.log("in getAll Data");
 
   try {
     const response = yield axios.get(`/allData`);
@@ -100,11 +99,11 @@ function* getAllData() {
   }
 }
 
+// Listens for dispatches
 function* infoSaga() {
   yield takeLatest("FETCH_GEOCODING", getCoordinates);
   yield takeLatest("FETCH_RESTAURANTS", getRestrInfo);
   yield takeLatest("FETCH_PHOTOS", getPhotos);
-  // yield takeLatest("FETCH_NEW_TABLE", getNewTable);
   yield takeLatest("FETCH_UPDATE", getAllData);
 }
 

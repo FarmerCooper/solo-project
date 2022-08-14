@@ -3,6 +3,7 @@ import useReduxStore from "../../hooks/useReduxStore";
 import { useDispatch, useSelector } from "react-redux";
 import { keyframes } from "styled-components";
 
+// Imports from MUI styling
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,6 +21,7 @@ function WishlistPage() {
     dispatch({ type: "FETCH_DROOLS" });
   }, []);
 
+  // Deletes wishlist items
   const handleDelete = (event) => {
     dispatch({ type: "VANISH_THOU", payload: event.target.value });
   };

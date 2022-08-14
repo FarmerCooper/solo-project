@@ -3,10 +3,10 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const axios = require('axios');
 
-// This route *should* return the API's data
+// This route returns the coordinates of the address
 router.get('/:address', (req, res) => {
 
-    console.log('This is req.params', req.params);
+  // console.log('This is req.params', req.params);
   const address = req.params.address;
 
     let config = {
@@ -14,7 +14,6 @@ router.get('/:address', (req, res) => {
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.PLACES_API_KEY}`,
         headers: {}
       };
-
       axios(config)
       .then(function (response) {
         // console.log('this is what JSON.stringy(response.data) is:', (response.data));

@@ -18,6 +18,7 @@ const center = {
   lng: -93.263,
 };
 
+// Map styling
 var stylers = [{
   "stylers": [{ 
      "hue": "#FAF1E6"
@@ -30,6 +31,7 @@ var stylers = [{
   }, {"marker": 'p'}]
 }];
 
+// Brings the env variables from .env file
 const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
 
 function Map() {
@@ -42,7 +44,6 @@ function Map() {
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
-  // const [locations, setLocations] = useState({lat: 0, lng: 0})
 
   const onLoad = useCallback(function callback(map, locations) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -59,6 +60,7 @@ function Map() {
     for (let i = 0; i < store.coordinates.length; i++) {
       // console.log('this is all locations', store.coordinates[i]);
 
+      // Sets the markers for the JS Google API
       locations.push(store.coordinates[i]);
     }
 
