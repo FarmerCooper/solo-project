@@ -1,15 +1,30 @@
-import React from 'react';
-
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
+import React from "react";
 
 function AboutPage() {
   return (
-    <div className="container">
+    <div className="flex-container">
+      <div className="flex-child">
+          <p>Technologies Used:</p>
+          <ul>
+            <li>PERN Stack</li>
+            <li>MUI</li>
+            <li>Google APIs</li>
+            <ul>
+              <li>Geocoding</li>
+              <li>Places</li>
+              <li>Photos</li>
+              <li>JS Map</li>
+            </ul>
+          </ul>
+          <p>Thanks to the Jemisin Cohort</p>
+          <p>Liz</p>
+          <p>Friends & Family</p>
+      </div>
       <div>
-        <p>This about page is for anyone to read!</p>
+        <img
+          className="flex-child"
+          src={require("../../images/linkedin.jpeg")}
+        />
       </div>
     </div>
   );
