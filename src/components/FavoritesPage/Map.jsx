@@ -18,6 +18,18 @@ const center = {
   lng: -93.263,
 };
 
+var stylers = [{
+  "stylers": [{ 
+     "hue": "#FAF1E6"
+   }, {
+     "saturation": 0
+   }, {
+     "lightness": 20
+   }, {
+    "contrast": 10
+  }, {"marker": 'p'}]
+}];
+
 const google_api_key = process.env.REACT_APP_MAPS_API_KEY;
 
 function Map() {
@@ -53,15 +65,17 @@ function Map() {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
-      zoom={4}
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={{
         streetViewControl: false,
         mapTypeControl: false,
         fullscreenControl: false,
-      }}
+        styles: stylers,
+        zoom: 5,
+        center: center
+      }
+      }
     >
       {/* Child components, such as markers, info windows, etc. */}
       {locations?.map((location, i) => {
