@@ -20,19 +20,21 @@ CREATE TABLE "favorites" (
 	"id" SERIAL PRIMARY KEY,
 	"restr_name" VARCHAR (255) NOT NULL,
 	"photos_url" VARCHAR (4000) NOT NULL,
-	"user_rating" NUMERIC(3,2) NOT NULL,
-	"user_id" int REFERENCES "user"
+	"user_rating" NUMERIC(3,2) DEFAULT 0,
+	"place_location" VARCHAR,
+	"user_id" int REFERENCES "user",
+	"place_id" VARCHAR (80) NOT NULL
 );
 
 
 CREATE TABLE "drool_list" (
 	"id" SERIAL PRIMARY KEY,
 	"restr_name" VARCHAR (255) NOT NULL,
-	"photos_url" VARCHAR (4000) NOT NULL,
+	"place_location" VARCHAR,
 	"user_id" int REFERENCES "user"
 );
 
-
+-- Downtown_Core_Old references the location where this app was created
 CREATE TABLE "Downtown_Core_Old" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (80) NOT NULL,
@@ -41,5 +43,6 @@ CREATE TABLE "Downtown_Core_Old" (
     "prominence" INT NOT NULL,
     "photos_reference" VARCHAR (1000) NOT NULL,
     "photos_url" VARCHAR (4000),
+    "place_location" VARCHAR,
     "place_id" VARCHAR (80) NOT NULL
 );
