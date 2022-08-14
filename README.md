@@ -4,8 +4,6 @@ Description
 
 Duration: 2 Week Sprint
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it?
-
 This project serves a few purposes.
 x Aids the user narrow their choices in making restaurant picks
 x Tracks users' favorite restaurants
