@@ -6,16 +6,16 @@ const axios = require('axios');
 
 // This route *should* return the API's data
 router.get('/:coordinates', (req, res) => {
-  console.log('this is req.', req.params);
+  // console.log('this is req.', req.params);
 
   let myArray = req.params.coordinates.split(/[, ]+/);
-  console.log('this is my array at 0', myArray[0])
+  // console.log('this is my array at 0', myArray[0])
 
     const latitude = myArray[0];
     const longitude = myArray[1];
 
 
-  console.log('this is latitude', latitude)
+  // console.log('this is latitude', latitude)
 
     let config = {
         method: 'get',
@@ -33,6 +33,7 @@ router.get('/:coordinates', (req, res) => {
       });
 });
 
+// Posts data
 router.post('/', async (req, res) => {
   const client = await pool.connect();
   // console.log('This is req.body.geometry.location', req.body.geometry.location);

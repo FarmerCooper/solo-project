@@ -22,18 +22,26 @@ function HomePage(props) {
   const [address, setAddress] = useState("");
   const [show, setShow] = useState("");
 
+  // Handles submission of the user's input address
   const handleSubmit = (event) => {
     event.preventDefault();
 
     dispatch({ type: "FETCH_GEOCODING", payload: address });
+
+    // Clears input
     setAddress('')
+
+    // Ternary purpose
     setShow(true);
+
+    // Shows an alert while data is being gathered
     swal("Loading...", "", "success");
   };
 
   const addToFavorites = (event) => {
     // console.log("this is event.target", event.target.value);
 
+    // If user is logged in, do this, else do that
     if (store.user.id) {
       dispatch({ type: "POST_FAVORITE", payload: event.target.value });
       swal("🫡", "Added to favorites!", "success");
@@ -45,6 +53,7 @@ function HomePage(props) {
   const addToDroolList = (event) => {
     // console.log("this is event.target", event.target.value);
 
+    // If user is logged in, do this, else do that
     if (store.user.id) {
       dispatch({ type: "POST_DROOL", payload: event.target.value });
       swal("👅 💦", "Added to Drool List", "success");

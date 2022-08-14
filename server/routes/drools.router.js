@@ -3,8 +3,9 @@ const router = express.Router();
 const pool = require("../modules/pool");
 const axios = require("axios");
 
+// Returns list of users' saved items based on their ID
 router.get("/", (req, res) => {
-  console.log("user.id logged in: ", req.user.id);
+  // console.log("user.id logged in: ", req.user.id);
 
   const queryText = `SELECT * FROM "drool_list" WHERE "user_id" = $1 ORDER BY id;`;
   pool
@@ -18,15 +19,17 @@ router.get("/", (req, res) => {
     });
 });
 
+// Saves users' wishlist information
 router.post("/", async (req, res) => {
     const client = await pool.connect();
-    console.log('this is req.body in favorites post', req.body);
+    // console.log('this is req.body in favorites post', req.body);
   
     const restaurant_name = req.body[0];
+    // Combines latitude and longitude into one object 
     const location = req.body[1] + ',' + req.body[2];
     const current_user = req.user.id;
   
-    console.log('this is location', location);
+    // console.log('this is location', location);
     try {
       await client.query("BEGIN");
       const favoriteResults = await client.query(
@@ -48,8 +51,9 @@ router.post("/", async (req, res) => {
     }
 });
 
+// Deletes restaurant from the list
 router.delete("/:restaurantName", (req, res) => {
-  console.log('in drool delete, req.params:', req.params);
+  // console.log('in drool delete, req.params:', req.params);
 
   const queryText = `DELETE FROM "drool_list" WHERE "restr_name" = $1 AND "user_id" = $2;`;
   pool

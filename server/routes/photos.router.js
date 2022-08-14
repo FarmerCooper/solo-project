@@ -5,7 +5,7 @@ const axios = require('axios');
 require('isomorphic-fetch');
 
 
-// This route *should* return the API's data
+// This route returns the photo given a photo reference
 router.get('/:photo_reference', (req, res) => {
     const photoReference = req.params.photo_reference
     
@@ -29,10 +29,11 @@ router.get('/:photo_reference', (req, res) => {
       });
 });
 
+// Updates the URL into the DB
 router.put('/', (req, res) => {
-    console.log('this is req.params', req.body);
-    console.log('this is req.params.url', req.body.url);
-    console.log('this is req.params.place_id', req.body.placeId);
+    // console.log('this is req.params', req.body);
+    // console.log('this is req.params.url', req.body.url);
+    // console.log('this is req.params.place_id', req.body.placeId);
   
     const newUrl = req.body.url;
     const place_id = req.body.placeId;
