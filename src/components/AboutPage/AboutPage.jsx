@@ -17,7 +17,7 @@ function AboutPage() {
             </ul>
           </ul>
           <p>Thanks to the Jemisin Cohort</p>
-          <p>Liz</p>
+          <p>Liz Kerber</p>
           <p>Friends & Family</p>
       </div>
       <div>
