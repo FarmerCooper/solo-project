@@ -19,6 +19,7 @@ function AboutPage() {
           <p>Thanks to the Jemisin Cohort</p>
           <p>Liz Kerber</p>
           <p>Friends & Family</p>
+          <p>Survivor Show</p>
       </div>
       <div>
         <img
