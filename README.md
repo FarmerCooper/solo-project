@@ -9,7 +9,7 @@ x Aids the user narrow their choices in making restaurant picks
 x Tracks users' favorite restaurants
 x Tracks users' wishlist restaurants (called Drool List in App) 
 
-To see the fully functional site, please visit: TBD
+To see the fully functional site, please visit: https://foodie-finds.herokuapp.com/#/home
 
 Screenshots
 
