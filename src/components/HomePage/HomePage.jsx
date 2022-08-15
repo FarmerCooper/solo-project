@@ -179,6 +179,7 @@ function HomePage(props) {
       </form>
       <h3>Enter an address to begin</h3>
       <h4>Address, City, State/Province/Country</h4>
+      <h5>**current limit: 50m radius search**</h5>
     </div>
   );
 }
